@@ -1,0 +1,188 @@
+{"frames": {
+
+"landscapeTiles_067.png":
+{
+	"frame": {"x":0,"y":0,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_074.png":
+{
+	"frame": {"x":0,"y":99,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_075.png":
+{
+	"frame": {"x":0,"y":198,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_080.png":
+{
+	"frame": {"x":0,"y":297,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_081.png":
+{
+	"frame": {"x":0,"y":396,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_082.png":
+{
+	"frame": {"x":132,"y":0,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_088.png":
+{
+	"frame": {"x":264,"y":0,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_089.png":
+{
+	"frame": {"x":396,"y":0,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_090.png":
+{
+	"frame": {"x":528,"y":0,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_095.png":
+{
+	"frame": {"x":132,"y":99,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_096.png":
+{
+	"frame": {"x":132,"y":198,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_097.png":
+{
+	"frame": {"x":132,"y":297,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_104.png":
+{
+	"frame": {"x":132,"y":396,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_105.png":
+{
+	"frame": {"x":264,"y":99,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_111.png":
+{
+	"frame": {"x":396,"y":99,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_112.png":
+{
+	"frame": {"x":528,"y":99,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_117.png":
+{
+	"frame": {"x":264,"y":198,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_119.png":
+{
+	"frame": {"x":264,"y":297,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_123.png":
+{
+	"frame": {"x":264,"y":396,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_125.png":
+{
+	"frame": {"x":396,"y":198,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_126.png":
+{
+	"frame": {"x":528,"y":198,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99}
+},
+"landscapeTiles_127.png":
+{
+	"frame": {"x":396,"y":297,"w":132,"h":98},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":98},
+	"sourceSize": {"w":132,"h":98}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "roads.png",
+	"format": "RGBA8888",
+	"size": {"w":660,"h":495},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9e85d02682e379671a5fa75e5354b2f7:99cda843047deb622e56459f7f3ba534:5fa6eff4328584b6bb55ff70f7b1d630$"
+}
+}

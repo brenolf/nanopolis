@@ -1,0 +1,59 @@
+{
+    // Settings
+    "passfail"      : false,  // Stop on first error.
+    "maxerr"        : 50,    // Maximum error before stopping.
+
+
+    // Predefined globals whom JSHint will ignore.
+    "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
+
+    "browserify"    : true,
+    "node"          : false,
+    "rhino"         : false,
+    "couch"         : false,
+    "wsh"           : true,   // Windows Scripting Host.
+
+    "jquery"        : false,
+    "prototypejs"   : false,
+    "mootools"      : false,
+    "dojo"          : false,
+
+    "globals"        : {
+                            "Phaser": true
+                        },
+
+    // Relaxation
+    "laxbreak"      : true,
+    "laxcomma"      : true,
+
+
+    // Development.
+    "debug"         : true,  // Allow debugger statements e.g. browser breakpoints.
+    "devel"         : true,   // Allow developments statements e.g. `console.log();`.
+
+
+    // ECMAScript 5/6
+    "esnext"        : true,
+    "strict"        : false,  // Require `use strict` pragma  in every file.
+    "globalstrict"  : false,  // Allow global "use strict" (also enables 'strict').
+
+
+    // The Good Parts.
+    "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).
+    "boss"          : false,  // Tolerate assignments inside if, for &amp; while. Usually conditions &amp; loops are for comparison, not assignments.
+    "eqeqeq"        : true,   // Require triple equals i.e. `===`.
+    "evil"          : false,  // Tolerate use of `eval`.
+    "expr"          : false,  // Tolerate `ExpressionStatement` as Programs.
+    "forin"         : false,  // Tolerate `for in` loops without `hasOwnPrototype`.
+    "latedef"       : true,   // Prohipit variable use before definition.
+    "loopfunc"      : false,  // Allow functions to be defined within loops.
+    "noarg"         : true,   // Prohibit use of `arguments.caller` and `arguments.callee`.
+    "scripturl"     : false,   // Tolerate script-targeted URLs.
+    "shadow"        : "inner",  // Allows re-define variables later in code e.g. `var x=1; x=2;`.
+    "supernew"      : true,  // Tolerate `new function () { ... };` and `new Object;`.
+    "unused"        : true, // This option warns when you define and never use your variables.
+    "undef"         : true,   // Require all non-global variables be declared before they are used.
+    "freeze"        : true, // This options prohibits overwriting prototypes of native objects such as Array, Date and so on.
+    "maxdepth"      : 2, // This option lets you control how nested do you want your blocks to be
+    "maxparams"     : 7 // This option lets you set the max number of formal parameters allowed per function
+}
