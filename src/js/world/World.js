@@ -1,4 +1,4 @@
-export const GRAVITY = 0;
+import Car from '../elements/Car'
 
 export class World {
   init (data) {
@@ -21,6 +21,8 @@ export class World {
     this.options();
 
     this.cursorPos = new Phaser.Plugin.Isometric.Point3();
+
+    this.car = new Car(this.game, 35, 35, 1);
   }
 
   spawnTiles () {
@@ -41,6 +43,8 @@ export class World {
     // determined from the 2D pointer position without extra trickery. By default, the z position is 0 if not set.
     this.game.iso.unproject(this.game.input.activePointer.position, this.cursorPos);
 
+    this.car.update()
+
     // Loop through all tiles and test to see if the 3D position from above intersects with the automatically generated IsoSprite tile bounds.
     this.isoGroup.forEach(tile => {
         let inBounds = tile.isoBounds.containsXY(this.cursorPos.x, this.cursorPos.y);
@@ -48,7 +52,7 @@ export class World {
         if (!tile.selected && inBounds) {
             tile.selected = true;
             tile.tint = 0x7800ff;
-            tile.loadTexture('roads', 'landscapeTiles_111.png')
+            // tile.loadTexture('roads', 'landscapeTiles_111.png')
             this.game.add.tween(tile).to({ isoZ: 4 }, 200, Phaser.Easing.Quadratic.InOut, true);
         }
         // If not, revert back to how it was.

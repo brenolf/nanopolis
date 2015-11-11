@@ -28,13 +28,13 @@ export default class Preload {
   }
 
   loadSprites () {
-    this.load.atlasJSONHash(
-      `roads`,
-      `assets/img/roads.png`,
-      `assets/json/roads.json`
-    );
+    const sprites = ['roads', 'cars']
 
-    this.load.image('tile', 'assets/img/tile.png');
+    sprites.forEach(sprite => this.load.atlasJSONHash(
+      `${sprite}`,
+      `assets/img/${sprite}.png`,
+      `assets/json/${sprite}.json`
+    ));
   }
 
   loadAudios () {

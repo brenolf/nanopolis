@@ -28,17 +28,19 @@ export default class Grid {
     lines.forEach(line => this.game.debug.geom(line));
   }
 
-  real (blocks_x, blocks_y) {
+  real (blocks_x, blocks_y, blocks_z) {
     return {
-      x: blocks_x * this.w,
-      y: blocks_y * this.h
+      x: blocks_x,
+      y: blocks_y,
+      z: blocks_z
     };
   }
 
-  tile (x, y) {
+  tile (x, y, z) {
     return {
-      x: Math.floor(x / this.w),
-      y: Math.floor(y / this.h)
+      x,
+      y,
+      z
     };
   }
 }

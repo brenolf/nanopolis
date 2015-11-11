@@ -1,7 +1,6 @@
 import {World} from '../world/World';
 import Grid from '../world/Grid';
 import UI from '../ui/UI';
-import {DIRECTION} from '../objects/GameSprite';
 
 const BG_DATA = require('../../json/bg');
 
@@ -19,7 +18,6 @@ export default class Game extends World {
   }
 
   render () {
-    // this.game.grid.render();
   }
 
   update () {

@@ -1,76 +1,86 @@
 const TIME = 1000;
 
-export const DIRECTION = {
+const DIRECTION = {
   UP: 0,
   RIGHT: 1,
   DOWN: 2,
   LEFT: 3
 };
 
-export class GameSprite extends Phaser.Sprite {
-  constructor (game, x, y, key, frame, group) {
-    let real = game.grid.real(x, y);
+const SPEED = 30;
 
-    key = key || `${game.GAME_DATA.name}.sprites`;
+export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
+  constructor (game, x, y, z, key, frame, group) {
+    // let real = game.grid.real(x, y, z);
+
+    let real = {x,y,z};
 
     group = group || game.world;
 
-    super(game, real.x, real.y, key, frame);
+    super(game, real.x, real.y, real.z, key, frame);
 
     this.TILE = {
       x: x,
       y: y
     };
 
-    this.moving = false;
+    this.anchor.set(0.5);
+
+    // this.moving = false;
 
     this.animation = null;
 
-    group.addChild(this);
+    let element = group.addChild(this);
+
+    game.physics.isoArcade.enable(element);
   }
 
   stop () {
-    this.moving = false;
+    // this.moving = false;
   }
 
   move (direction) {
-    if (this._checkBounds(direction) === false) {
-      this.animation = null;
-      return false;
-    }
+    // if (this._checkBounds(direction) === false) {
+    //   this.animation = null;
+    //   return false;
+    // }
 
-    this.moving = true;
+    // this.moving = true;
 
     switch (direction) {
       case DIRECTION.UP:
-        this.TILE.y--;
+        this.body.velocity.y = -SPEED;
       break;
 
       case DIRECTION.RIGHT:
-        this.TILE.x++;
+        this.body.velocity.x = SPEED;
       break;
 
       case DIRECTION.DOWN:
-        this.TILE.y++;
+        this.body.velocity.y = SPEED;
       break;
 
       case DIRECTION.LEFT:
-        this.TILE.x--;
+        this.body.velocity.x = -SPEED;
       break;
+
+      default:
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
     }
 
-    let target = this.game.grid.real(this.TILE.x, this.TILE.y);
-
-    let movingTween = this.game.add.tween(this).to(target, TIME);
-    movingTween.onComplete.add(this.stop, this);
-
-    if (this.animation) {
-      this.animation.chain(movingTween);
-    } else {
-      movingTween.start();
-    }
-
-    this.animation = movingTween;
+    // let target = this.game.grid.real(this.TILE.x, this.TILE.y);
+    //
+    // let movingTween = this.game.add.tween(this).to(target, TIME);
+    // movingTween.onComplete.add(this.stop, this);
+    //
+    // if (this.animation) {
+    //   this.animation.chain(movingTween);
+    // } else {
+    //   movingTween.start();
+    // }
+    //
+    // this.animation = movingTween;
 
     return true;
   }
