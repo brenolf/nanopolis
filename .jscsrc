@@ -35,7 +35,7 @@
   "requirePaddingNewLinesAfterBlocks": true,
   "requirePaddingNewLinesInObjects": true,
   "requireParenthesesAroundIIFE": true,
-  "requireSemicolons": true,
+  "disallowSemicolons": true,
   "requireSpaceAfterBinaryOperators": true,
   "requireSpaceBeforeBinaryOperators": true,
   "requireSpaceAfterLineComment": true,

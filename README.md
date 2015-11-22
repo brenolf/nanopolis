@@ -14,11 +14,11 @@ npm install
 
 ## Criando uma build
 
-Rode `gulp serve` para criar uma build e tê-la servida local para testes. Para deploy, utilize `gulp --production`.
+Rode `npm start` para criar uma build e servir localmente para testes. Para deploy, utilize `npm run deploy`.
 
 ## Estilo de código
 
-Rode `gulp code-check` para testar a qualidade do código antes de commitar.
+Rode `npm test` para testar a qualidade do código antes de commitar.
 
 ## Lisença
 

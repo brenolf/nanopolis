@@ -1,27 +1,24 @@
-import {World} from '../world/World';
-import Grid from '../world/Grid';
-import UI from '../ui/UI';
-
-const BG_DATA = require('../../json/bg');
+import {World} from '../world/World'
+import UI from '../ui/UI'
 
 export default class Game extends World {
   create () {
-    super.create();
+    super.create()
 
-    this.START = this.game.time.now;
+    this.START = this.game.time.now
 
-    this.ui = new UI(this, BG_DATA);
+    this.ui = new UI(this)
 
-    this.paused = false;
+    this.ui.buildInterface()
 
-    this.game.grid = new Grid(this.game, 16, 12);
+    this.paused = false
   }
 
   render () {
   }
 
   update () {
-    super.update();
+    super.update()
   }
 
   lost () {
@@ -31,12 +28,12 @@ export default class Game extends World {
   }
 
   pause () {
-    this.paused = true;
-    super.pause();
+    this.paused = true
+    super.pause()
   }
 
   resume () {
-    this.paused = false;
-    super.resume();
+    this.paused = false
+    super.resume()
   }
 }

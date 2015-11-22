@@ -39,7 +39,7 @@
 
 
     // The Good Parts.
-    "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).
+    "asi"           : true,  // Tolerate Automatic Semicolon Insertion (no semicolons).
     "boss"          : false,  // Tolerate assignments inside if, for &amp; while. Usually conditions &amp; loops are for comparison, not assignments.
     "eqeqeq"        : true,   // Require triple equals i.e. `===`.
     "evil"          : false,  // Tolerate use of `eval`.
@@ -54,6 +54,6 @@
     "unused"        : true, // This option warns when you define and never use your variables.
     "undef"         : true,   // Require all non-global variables be declared before they are used.
     "freeze"        : true, // This options prohibits overwriting prototypes of native objects such as Array, Date and so on.
-    "maxdepth"      : 2, // This option lets you control how nested do you want your blocks to be
+    "maxdepth"      : 3, // This option lets you control how nested do you want your blocks to be
     "maxparams"     : 7 // This option lets you set the max number of formal parameters allowed per function
 }
