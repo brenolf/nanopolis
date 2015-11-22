@@ -1,7 +1,7 @@
-# Dumb cars
+# Nanopolis
 > Um clone do Pit Droids
 
-Dumb cars é um jogo de navegador puzzle utilizando Phaser e ES6.
+Nanopolis é um jogo de navegador puzzle utilizando Phaser e ES6.
 
 ## Instalando
 
