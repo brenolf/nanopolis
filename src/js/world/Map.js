@@ -86,6 +86,7 @@ export default class Map {
     }
 
     let needsBiggerZ = type === 'source' || type === 'target'
+
     needsBiggerZ = needsBiggerZ && index !== 19 && index !== 25
 
     return {

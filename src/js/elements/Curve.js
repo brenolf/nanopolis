@@ -1,7 +1,5 @@
 import Tile from '../objects/Tile'
 
-const HALF_SIZE = require('../../json/game.json').tileSize / 2
-
 export default class Curve extends Tile {
   constructor (game, x, y, z, name, group) {
     const CURVES = {

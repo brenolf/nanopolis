@@ -4,7 +4,7 @@ import Car from '../elements/Car'
 const HALF_SIZE = require('../../json/game.json').tileSize / 2
 
 export default class Source extends Tile {
-  constructor (game, x, y, z, name, direction, group) {
+  constructor () {
     super(...arguments)
 
     this.cars = []

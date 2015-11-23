@@ -35,6 +35,7 @@ export default class Car extends GameSprite {
             this.move(heading)
             this.lastCommand = tile
           }
+
         break
 
         case 'Target':

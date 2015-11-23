@@ -16,7 +16,8 @@
     "dojo"          : false,
 
     "globals"        : {
-      "Phaser": true
+      "Phaser": true,
+      "DIRECTION": true
     },
 
     "laxbreak"      : true,
