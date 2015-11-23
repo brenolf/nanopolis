@@ -29,6 +29,9 @@ export default class Map {
   build () {
     let tile
 
+    this.game.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
+    this.game.bmd.addToWorld();
+
     for (let k = 0; k < this.bounds.h * this.bounds.w; k++) {
       const i = (k % this.bounds.w)
       const j = Math.floor(k / this.bounds.h)
@@ -55,6 +58,17 @@ export default class Map {
 
         case 'curve':
           tile = new Curve(this.game, x, y, z, name, this.tiles)
+
+          // DEBUG:
+          this.game.bmd.rect(tile.x, tile.y, 3, 3, 'red')
+          this.game.bmd.rect(tile.x - 60, tile.y + 30, 3, 3, 'yellow')
+          this.game.bmd.rect(tile.x, tile.y + 60, 3, 3, 'magenta')
+          this.game.bmd.rect(tile.x + 60, tile.y + 30, 3, 3, 'black')
+          this.game.bmd.rect(tile.x, tile.y + 30, 3, 3, 'blue')
+          this.game.bmd.rect(tile.x + 30, tile.y + 45, 3, 3, 'cyan')
+          this.game.bmd.rect(tile.x - 30, tile.y + 15, 3, 3, 'lightgreen')
+          this.game.bmd.rect(tile.x + 30, tile.y + 15, 3, 3, 'orange')
+          this.game.bmd.rect(tile.x - 30, tile.y + 45, 3, 3, 'white')
         break
 
         default:

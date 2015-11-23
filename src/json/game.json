@@ -1,7 +1,7 @@
 {
   "name": "nanopolis",
-  "width": 640,
-  "height": 480,
+  "width": 900,
+  "height": 500,
   "tileSize": 70,
   "firstMap": 1
 }

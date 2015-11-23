@@ -14,11 +14,13 @@ export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   }
 
   stop () {
+    this.body.velocity.x = 0
+    this.body.velocity.y = 0
+    this.body.velocity.z = 0
   }
 
   move (direction) {
-    this.body.velocity.x = 0
-    this.body.velocity.y = 0
+    this.stop()
 
     switch (direction) {
       case DIRECTION.UP:

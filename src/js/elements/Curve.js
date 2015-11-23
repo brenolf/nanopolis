@@ -1,5 +1,12 @@
 import Tile from '../objects/Tile'
 
+const CONTROL_POINTS = {
+  'c125': [[-30, 15], [0, 30], [-30, 45]],
+  'c126': [[30, 15], [0, 30], [-30, 15]],
+  'c122': [[30, 45], [0, 30], [-30, 45]],
+  'c124': [[30, 15], [0, 30], [30, 45]]
+}
+
 export default class Curve extends Tile {
   constructor (game, x, y, z, name, group) {
     const CURVES = {
@@ -42,13 +49,31 @@ export default class Curve extends Tile {
       'c124': [17, 28, 1]
     }
 
-    const K = allowed[this.name]
+    let points = []
 
-    if (K[2] * diff.x >= K[2] * K[0] && K[2] * diff.y >= K[2] * K[1]) {
-      return this._nextHeading(car.heading)
+    for (let i = 0; i <= 1; i += 0.006) {
+      let px = CONTROL_POINTS[this.name].map(pt => pt[0] + this.x)
+      let py = CONTROL_POINTS[this.name].map(pt => pt[1] + this.y)
+
+      px = this.game.math.bezierInterpolation(px, i);
+      py = this.game.math.bezierInterpolation(py, i);
+
+      points.push({
+        x: px,
+        y: py
+      })
     }
 
-    return -1
+    const next = this._nextHeading(car.heading)
+
+    if (next < 0) {
+      return null
+    }
+
+    return {
+      points,
+      next
+    }
   }
 
   _nextHeading (heading) {
