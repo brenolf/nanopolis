@@ -1,43 +1,36 @@
-var gulp        = require('gulp'),
-    babelify    = require('babelify'),
-    browserify  = require('browserify'),
-    source      = require('vinyl-source-stream'),
-    bufferify   = require('vinyl-buffer'),
-    jshint      = require('gulp-jshint'),
-    uglify      = require('gulp-uglify'),
-    img         = require('gulp-imagemin'),
-    jscs        = require('gulp-jscs'),
-    argv        = require('yargs').argv,
-    gulpif      = require('gulp-if'),
-    connect     = require('gulp-connect');
+var gulp           = require('gulp'),
+    babelify       = require('babelify'),
+    browserify     = require('browserify'),
+    source         = require('vinyl-source-stream'),
+    bufferify      = require('vinyl-buffer'),
+    jshint         = require('gulp-jshint'),
+    uglify         = require('gulp-uglify'),
+    img            = require('gulp-imagemin'),
+    jscs           = require('gulp-jscs'),
+    argv           = require('yargs').argv,
+    gulpif         = require('gulp-if'),
+    connect        = require('gulp-connect'),
+    bower          = require('gulp-main-bower-files'),
+    flatten        = require('gulp-flatten')
 
-var DEBUG = argv.production ? false : true;
-var NAME = require('./package').name;
+var DEBUG = argv.production ? false : true
+var NAME = require('./package').name
 
-gulp.task('default', ['scripts', 'copylibs', 'html', 'img', 'audio']);
+gulp.task('default', ['scripts', 'html', 'img', 'audio'])
 
 gulp.task('watch', ['default'], function () {
-    gulp.watch('./src/js/**/*', ['scripts']);
-    gulp.watch('./src/html/**/*', ['html']);
-    gulp.watch('./src/json/**/*', ['json', 'scripts']);
-});
-
-gulp.task('copylibs', function () {
-  return gulp
-  .src([
-    './node_modules/phaser/build/phaser.min.js',
-    './node_modules/phaser-plugin-isometric/dist/phaser-plugin-isometric.min.js'
-  ])
-  .pipe(gulp.dest('./build/assets/js/lib/'));
-});
+    gulp.watch('./src/js/**/*', ['scripts'])
+    gulp.watch('./src/html/**/*', ['html'])
+    gulp.watch('./src/json/**/*', ['json', 'scripts'])
+})
 
 gulp.task('code-check', function () {
   return gulp
   .src('./src/js/**/*')
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'))
-  .pipe(jscs({configPath: './.jscsrc'}));
-});
+  .pipe(jscs({configPath: './.jscsrc'}))
+})
 
 gulp.task('scripts', ['json'], function () {
     browserify({
@@ -49,37 +42,52 @@ gulp.task('scripts', ['json'], function () {
     .pipe(source(NAME + '.min.js'))
     .pipe(bufferify())
     .pipe(gulpif(DEBUG === false, uglify()))
-    .pipe(gulp.dest('./build/assets/js/'));
-});
+    .pipe(gulp.dest('./build/assets/js/'))
+
+    return gulp
+    .src('./bower.json')
+    .pipe(bower({
+      overrides: {
+        phaser: {
+          main: './build/phaser.min.js'
+        },
+        'phaser-plugin-isometric': {
+          main: './dist/phaser-plugin-isometric.min.js'
+        }
+      }
+    }))
+    .pipe(flatten())
+    .pipe(gulp.dest('./build/assets/libs/'))
+})
 
 gulp.task('html', function() {
   return gulp
   .src('./src/html/**/*')
-  .pipe(gulp.dest('./build/'));
-});
+  .pipe(gulp.dest('./build/'))
+})
 
 gulp.task('json', function() {
   return gulp
   .src('./src/json/*')
-  .pipe(gulp.dest('./build/assets/json'));
-});
+  .pipe(gulp.dest('./build/assets/json'))
+})
 
 gulp.task('audio', function () {
   return gulp
   .src('./src/audio/*')
-  .pipe(gulp.dest('./build/assets/audio'));
-});
+  .pipe(gulp.dest('./build/assets/audio'))
+})
 
 gulp.task('img', function() {
   return gulp
   .src('./src/img/*')
   // .pipe(img())
-  .pipe(gulp.dest('./build/assets/img/'));
-});
+  .pipe(gulp.dest('./build/assets/img/'))
+})
 
 gulp.task('serve', ['watch'], function () {
   connect.server({
     root: './build/',
     livereload: true
-  });
-});
+  })
+})

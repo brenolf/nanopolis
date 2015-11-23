@@ -1,7 +1,7 @@
 {
   "name": "dumbcars",
   "version": "1.0.0",
-  "description": "A pit Droids clone",
+  "description": "A pit minis on the move clone",
   "main": "gulpfile.js",
   "scripts": {
     "test": "gulp code-check",
@@ -24,18 +24,17 @@
     "browserify": "^9.0.8",
     "browserify-shim": "^3.8.6",
     "gulp-connect": "^2.2.0",
+    "gulp-flatten": "^0.2.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
     "gulp-jscs": "latest",
     "gulp-jshint": "latest",
+    "gulp-main-bower-files": "^1.2.5",
     "gulp-uglify": "^1.2.0",
     "jshint-stylish": "^1.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.23.0"
   },
-  "dependencies": {
-    "phaser": "^2.4.2",
-    "phaser-plugin-isometric": "^0.9.2"
-  }
+  "dependencies": {}
 }

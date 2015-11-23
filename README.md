@@ -1,15 +1,14 @@
 # Nanopolis
-> Um clone do Pit Droids
+> Um clone do Minis on the move
 
 Nanopolis é um jogo de navegador puzzle utilizando Phaser e ES6.
 
 ## Instalando
 
-Tenha certeza que tem o node instalado e que `npm` possa ser executado. Então rode:
-
 ```
-sudo npm install -g gulp
+sudo npm install -g gulp bower
 npm install
+bower install
 ```
 
 ## Criando uma build
