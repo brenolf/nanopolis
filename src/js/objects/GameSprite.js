@@ -1,4 +1,4 @@
-const SPEED = 30
+const SPEED = 60
 
 export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   constructor (game, x, y, z, key, frame, group) {
@@ -6,20 +6,11 @@ export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
 
     super(game, x, y, z, key, frame)
 
-    this.TILE = {
-      x: x,
-      y: y
-    }
-
     this.anchor.set(0.5)
 
     this.animation = null
 
-    let element = group.addChild(this)
-
-    game.physics.isoArcade.enable(element)
-
-    this.body.collideWorldBounds = true
+    group.add(this)
   }
 
   stop () {

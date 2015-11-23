@@ -1,5 +1,6 @@
 import Source from '../elements/Source'
 import Target from '../elements/Target'
+import Tile from '../elements/Tile'
 
 const MAPS = require('../../json/maps.json')
 const SIZE = 70
@@ -35,8 +36,7 @@ export default class Map {
       const y = j * SIZE
       const z = (data.needsBiggerZ) ? 34 : 0
 
-      tile = this.game.add.isoSprite(x, y, z, 'roads', data.name, this.tiles)
-      tile.anchor.set(0.5, 0)
+      tile = new Tile(this.game, x, y, z, data.name, this.tiles)
 
       if (data.landmark) {
         const Landmark = data.isSource ? Source : Target
@@ -44,6 +44,11 @@ export default class Map {
         this[data.landmark] = new Landmark(this.game, x, y, data.direction)
       }
     }
+  }
+
+  update () {
+    this.source.update()
+    this.target.update()
   }
 
   _decode (name) {

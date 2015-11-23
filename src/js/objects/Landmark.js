@@ -10,10 +10,14 @@ export default class Landmark {
   }
 
   spawn () {
-    const car = new Car(this.game, 35, 35, 1)
+    const car = new Car(this.game, 35, 35, 1, this.direction)
 
     this.cars.push(car)
 
-    car.move(this.direction)
+    car.move()
+  }
+
+  update () {
+    this.cars.forEach(car => car.update())
   }
 }

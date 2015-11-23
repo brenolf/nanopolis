@@ -34,6 +34,8 @@ export default class World {
       this.game.input.activePointer.position,
       this.cursorPos
     )
+
+    this.game.map.update()
   }
 
   pause () {
