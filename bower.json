@@ -18,6 +18,6 @@
   ],
   "dependencies": {
     "phaser": "~2.4.4",
-    "phaser-plugin-isometric": "*"
+    "phaser-plugin-isometric": "https://github.com/lewster32/phaser-plugin-isometric.git"
   }
 }
