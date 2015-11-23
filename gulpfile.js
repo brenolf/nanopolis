@@ -34,8 +34,8 @@ gulp.task('code-check', function () {
 
 gulp.task('scripts', ['json'], function () {
     browserify({
-        entries: './src/js/states/main.js',
-        debug: DEBUG
+      entries: './src/js/states/main.js',
+      debug: DEBUG
     })
     .transform(babelify.configure({ stage: 0 }))
     .bundle()
