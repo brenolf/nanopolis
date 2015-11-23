@@ -1,11 +1,4 @@
-const DIRECTION = {
-  UP: 0,
-  RIGHT: 1,
-  DOWN: 2,
-  LEFT: 3
-}
-
-const SPEED = 90
+const SPEED = 30
 
 export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   constructor (game, x, y, z, key, frame, group) {

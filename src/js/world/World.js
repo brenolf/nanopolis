@@ -1,9 +1,15 @@
-import Car from '../elements/Car'
 import Map from './Map'
 
 const GAME = require('../../json/game.json')
 
-export class World {
+global.DIRECTION = {
+  UP: 0,
+  RIGHT: 1,
+  DOWN: 2,
+  LEFT: 3
+}
+
+export default class World {
   init (data) {
     this.data = data
   }
@@ -21,8 +27,6 @@ export class World {
     this.map.build()
 
     this.cursorPos = new Phaser.Plugin.Isometric.Point3()
-
-    this.car = new Car(this.game, 35, 35, 1)
   }
 
   update () {
@@ -30,8 +34,6 @@ export class World {
       this.game.input.activePointer.position,
       this.cursorPos
     )
-
-    this.car.update()
   }
 
   pause () {

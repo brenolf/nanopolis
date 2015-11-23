@@ -1,4 +1,4 @@
-import {World} from '../world/World'
+import World from '../world/World'
 import UI from '../ui/UI'
 
 export default class Game extends World {
@@ -12,6 +12,8 @@ export default class Game extends World {
     this.ui.buildInterface()
 
     this.paused = false
+
+    this.map.source.spawn()
   }
 
   render () {

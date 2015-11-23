@@ -1,7 +1,12 @@
+import Source from '../elements/Source'
+import Target from '../elements/Target'
+
 const MAPS = require('../../json/maps.json')
 const SIZE = 70
-const SOURCES = [33, 26, 34, 41]
-const TARGETS = [18, 13, 19, 25]
+
+//              [ N,  E,  S,  W]
+const SOURCES = [41, 33, 26, 34]
+const TARGETS = [25, 18, 13, 19]
 
 export default class Map {
   constructor (index, game) {
@@ -24,7 +29,7 @@ export default class Map {
       const i = (k % this.bounds.w)
       const j = Math.floor(k / this.bounds.h)
 
-      const data = this._decode(this.map[i][j])
+      const data = this._decode(this.map[j][i])
 
       const x = i * SIZE
       const y = j * SIZE
@@ -34,10 +39,9 @@ export default class Map {
       tile.anchor.set(0.5, 0)
 
       if (data.landmark) {
-        this[data.landmark] = {
-          x,
-          y
-        }
+        const Landmark = data.isSource ? Source : Target
+
+        this[data.landmark] = new Landmark(this.game, x, y, data.direction)
       }
     }
   }
@@ -57,6 +61,7 @@ export default class Map {
       isSource,
       isTarget,
       index,
+      direction: (isSource ? SOURCES : TARGETS).indexOf(index),
       needsBiggerZ
     }
   }
