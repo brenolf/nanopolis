@@ -16,9 +16,6 @@ export default class Game extends World {
     this.game.map.source.spawn()
   }
 
-  render () {
-  }
-
   update () {
     super.update()
   }

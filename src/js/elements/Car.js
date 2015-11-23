@@ -9,6 +9,8 @@ export default class Car extends GameSprite {
     this.game.physics.isoArcade.enable(this)
 
     this.heading = heading
+
+    this.lastCommand = null
   }
 
   move (direction) {
@@ -19,7 +21,7 @@ export default class Car extends GameSprite {
 
   update () {
     this.game.map.tiles.forEach(tile => {
-      if (!tile.hover(this)) {
+      if (!tile.hover(this) || this.lastCommand === tile) {
         return
       }
 
@@ -31,6 +33,7 @@ export default class Car extends GameSprite {
 
           if (heading >= 0) {
             this.move(heading)
+            this.lastCommand = tile
           }
         break
 

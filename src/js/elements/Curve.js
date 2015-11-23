@@ -27,14 +27,6 @@ export default class Curve extends Tile {
   }
 
   next (car) {
-    const heading = car.heading
-
-    const next = this._nextHeading(heading)
-
-    if (next < 0) {
-      return next
-    }
-
     const {x, y} = this.game.iso.unproject({
       x: car.x,
       y: car.y
@@ -45,25 +37,20 @@ export default class Curve extends Tile {
       y: Math.floor(Math.abs(this.regularizedPoint.y - y))
     }
 
-    const diff2 = {
-      x: Math.floor(Math.abs(this.x - car.x)),
-      y: Math.floor(Math.abs(this.y - car.y))
+    const allowed = {
+      'c125': [24, 35, 1],
+      'c126': [24, 35, 1],
+      'c122': [20, 40, -1],
+      'c124': [17, 28, 1]
     }
 
-    const moving = {
-      horizontally: (heading === DIRECTION.RIGHT || heading === DIRECTION.LEFT),
-      vertically: (heading === DIRECTION.UP || heading === DIRECTION.DOWN)
+    const K = allowed[this.name]
+
+    if (K[2] * diff.x >= K[2] * K[0] && K[2] * diff.y >= K[2] * K[1]) {
+      return this._nextHeading(car.heading)
     }
 
-    if (this.name === 'c122' || this.name === 'c124') {
-      if (diff.x >= 24 && diff.x >= 24) {
-        return next
-      }
-    } else {
-      if (diff.x >= 24 && diff.y >= 35) {
-        return next
-      }
-    }
+    return -1
   }
 
   _nextHeading (heading) {

@@ -1,4 +1,4 @@
-const SPEED = 180
+const SPEED = 50
 
 export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   constructor (game, x, y, z, key, frame, group) {
