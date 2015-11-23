@@ -13,7 +13,7 @@ export default class Game extends World {
 
     this.paused = false
 
-    this.map.source.spawn()
+    this.game.map.source.spawn()
   }
 
   render () {

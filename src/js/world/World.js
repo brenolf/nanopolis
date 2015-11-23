@@ -20,11 +20,11 @@ export default class World {
     this.game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE)
     this.game.iso.anchor.setTo(0.5, 0)
 
-    this.map = new Map(0, this.game)
+    this.game.map = new Map(0, this.game)
   }
 
   create () {
-    this.map.build()
+    this.game.map.build()
 
     this.cursorPos = new Phaser.Plugin.Isometric.Point3()
   }
