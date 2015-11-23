@@ -1,7 +1,7 @@
-import Landmark from '../objects/Landmark'
+import Tile from '../objects/Tile'
 
-export default class Target extends Landmark{
-  constructor (game, x, y, direction) {
+export default class Target extends Tile{
+  constructor (game, x, y, z, name, direction, group) {
     super(...arguments)
   }
 }

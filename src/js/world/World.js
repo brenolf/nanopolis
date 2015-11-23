@@ -20,7 +20,7 @@ export default class World {
     this.game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE)
     this.game.iso.anchor.setTo(0.5, 0)
 
-    this.game.map = new Map(0, this.game)
+    this.game.map = new Map(GAME.firstMap, this.game)
   }
 
   create () {

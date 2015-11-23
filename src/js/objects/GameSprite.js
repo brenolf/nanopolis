@@ -1,4 +1,4 @@
-const SPEED = 60
+const SPEED = 180
 
 export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   constructor (game, x, y, z, key, frame, group) {
@@ -17,6 +17,9 @@ export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
   }
 
   move (direction) {
+    this.body.velocity.x = 0
+    this.body.velocity.y = 0
+
     switch (direction) {
       case DIRECTION.UP:
         this.body.velocity.y = -SPEED
@@ -32,13 +35,6 @@ export default class GameSprite extends Phaser.Plugin.Isometric.IsoSprite {
 
       case DIRECTION.LEFT:
         this.body.velocity.x = -SPEED
-      break
-
-      default:
-        this.body.velocity.x = 0
-        this.body.velocity.y = 0
     }
-
-    return true
   }
 }

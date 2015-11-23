@@ -8,32 +8,35 @@ export default class Car extends GameSprite {
 
     this.game.physics.isoArcade.enable(this)
 
-    this.body.collideWorldBounds = true
-
     this.heading = heading
   }
 
-  move () {
+  move (direction) {
+    this.heading = direction || this.heading
+
     super.move(this.heading)
   }
 
   update () {
-    this._overlap()
-  }
-
-  _overlap () {
-    const projection = this.game.iso.unproject({
-      x: this.x,
-      y: this.y
-    })
-
     this.game.map.tiles.forEach(tile => {
-      if (tile.isoBounds.containsXY(projection.x, projection.y)) {
-        tile.tint = 0x86bfda
+      if (!tile.hover(this)) {
+        return
+      }
 
-        if (tile.curve) {
-          console.log(this.heading, tile.curve)
-        }
+      tile.tint = 0x994444
+
+      switch (tile.constructor.name) {
+        case 'Curve':
+          const heading = tile.next(this)
+
+          if (heading >= 0) {
+            this.move(heading)
+          }
+        break
+
+        case 'Target':
+          this.destroy()
+        break
       }
     })
   }

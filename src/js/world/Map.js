@@ -1,13 +1,16 @@
+import Tile from '../objects/Tile'
 import Source from '../elements/Source'
 import Target from '../elements/Target'
-import Tile from '../elements/Tile'
+import Curve from '../elements/Curve'
 
 const MAPS = require('../../json/maps.json')
-const SIZE = 70
+const SIZE = require('../../json/game.json').tileSize
 
 //              [ N,  E,  S,  W]
 const SOURCES = [41, 33, 26, 34]
 const TARGETS = [25, 18, 13, 19]
+
+const CURVES = [122, 124, 125, 126]
 
 export default class Map {
   constructor (index, game) {
@@ -30,18 +33,32 @@ export default class Map {
       const i = (k % this.bounds.w)
       const j = Math.floor(k / this.bounds.h)
 
-      const data = this._decode(this.map[j][i])
+      const name = this.map[j][i]
+      const data = this._decode(name)
 
       const x = i * SIZE
       const y = j * SIZE
       const z = (data.needsBiggerZ) ? 34 : 0
 
-      tile = new Tile(this.game, x, y, z, data.name, this.tiles)
+      switch (data.type) {
+        case 'source':
+          tile = new Source(this.game, x, y, z, name, data.heading, this.tiles)
 
-      if (data.landmark) {
-        const Landmark = data.isSource ? Source : Target
+          this.source = tile
+        break
 
-        this[data.landmark] = new Landmark(this.game, x, y, data.direction)
+        case 'target':
+          tile = new Target(this.game, x, y, z, name, data.heading, this.tiles)
+
+          this.target = tile
+        break
+
+        case 'curve':
+          tile = new Curve(this.game, x, y, z, name, this.tiles)
+        break
+
+        default:
+          tile = new Tile(this.game, x, y, z, name, null, this.tiles)
       }
     }
   }
@@ -52,21 +69,30 @@ export default class Map {
   }
 
   _decode (name) {
+    const sheet = name[0]
+
     const index = parseInt(name.substr(1))
 
-    const isSource = SOURCES.indexOf(index) >= 0
+    let type = null
 
-    const isTarget = TARGETS.indexOf(index) >= 0
+    if (sheet === 'c') {
+      if (SOURCES.indexOf(index) >= 0) {
+        type = 'source'
+      } else if (TARGETS.indexOf(index) >= 0) {
+        type = 'target'
+      } else if (CURVES.indexOf(index) >= 0) {
+        type = 'curve'
+      }
+    }
 
-    const needsBiggerZ = (isSource || isTarget) && index !== 19 && index !== 25
+    let needsBiggerZ = type === 'source' || type === 'target'
+    needsBiggerZ = needsBiggerZ && index !== 19 && index !== 25
 
     return {
       name,
-      landmark: isSource ? 'source' : (isTarget ? 'target' : ''),
-      isSource,
-      isTarget,
+      type,
       index,
-      direction: (isSource ? SOURCES : TARGETS).indexOf(index),
+      heading: (type === 'source' ? SOURCES : TARGETS).indexOf(index),
       needsBiggerZ
     }
   }
