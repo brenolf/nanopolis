@@ -1,5 +1,7 @@
 import Tile from '../objects/Tile'
 
+const STEPS = 166
+
 const CONTROL_POINTS = {
   'c125': [[-30, 15], [0, 30], [-30, 45]],
   'c126': [[30, 15], [0, 30], [-30, 15]],
@@ -49,6 +51,12 @@ export default class Curve extends Tile {
       'c124': [17, 28, 1]
     }
 
+    const next = this._nextHeading(car.heading)
+
+    if (next < 0) {
+      return null
+    }
+
     let points = []
 
     for (let i = 0; i <= 1; i += 0.006) {
@@ -62,12 +70,6 @@ export default class Curve extends Tile {
         x: px,
         y: py
       })
-    }
-
-    const next = this._nextHeading(car.heading)
-
-    if (next < 0) {
-      return null
     }
 
     return {
