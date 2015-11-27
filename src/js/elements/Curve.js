@@ -59,7 +59,7 @@ export default class Curve extends Tile {
 
     let points = []
 
-    for (let i = 0; i <= 1; i += 0.006) {
+    for (let i = 0; i <= 1; i += 0.005) {
       let px = CONTROL_POINTS[this.name].map(pt => pt[0] + this.x)
       let py = CONTROL_POINTS[this.name].map(pt => pt[1] + this.y)
 
