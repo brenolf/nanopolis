@@ -67,7 +67,6 @@ export default class Car extends GameSprite {
   steer (frame) {
     frame = frame < 10 ? `0${frame}` : frame
     this.loadTexture('cars', `carBlack1_0${frame}`)
-    this.anchor.set(0.5)
   }
 
   update () {
