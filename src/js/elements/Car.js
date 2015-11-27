@@ -37,10 +37,10 @@ export default class Car extends GameSprite {
       return super.move(this.heading)
     }
 
-    const pointsLeft = this.path.points.length
+    const left = this.path.points.length
 
     if (this.totalPoints < 0) {
-      this.totalPoints = pointsLeft
+      this.totalPoints = left
     }
 
     this.stop()
@@ -50,23 +50,23 @@ export default class Car extends GameSprite {
     this.body.x = x
     this.body.y = y
 
-    const steer = ANIMATIONS[`${this.heading}${this.path.next}`]
+    if (left <= this.totalPoints / 4 || left <= 3 * this.totalPoints / 4) {
+      this.steer((left <= this.totalPoints / 4) ^ 0)
+    }
 
-    if (pointsLeft === 1) {
+    if (left === 1) {
       this.heading = this.path.next
       super.move(this.heading)
       this.path = null
       this.totalPoints = -1
-    } else if (pointsLeft <= this.totalPoints / 4) {
-      this.steer(steer[1])
-    } else if (pointsLeft <= 3 * this.totalPoints / 4) {
-      this.steer(steer[0])
     }
   }
 
   steer (frame) {
-    frame = frame < 10 ? `0${frame}` : frame
-    this.loadTexture('cars', `carBlack1_0${frame}`)
+    const animation = ANIMATIONS[`${this.heading}${this.path.next}`]
+
+    frame = animation[frame] < 10 ? `0${animation[frame]}` : animation[frame]
+    this.frameName = `carBlack1_0${frame}`
   }
 
   update () {
