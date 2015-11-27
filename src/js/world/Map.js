@@ -29,8 +29,8 @@ export default class Map {
   build () {
     let tile
 
-    this.game.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
-    this.game.bmd.addToWorld();
+    this.game.bmd = this.game.add.bitmapData(this.game.width, this.game.height)
+    this.game.bmd.addToWorld()
 
     for (let k = 0; k < this.bounds.h * this.bounds.w; k++) {
       const i = (k % this.bounds.w)

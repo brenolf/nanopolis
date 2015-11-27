@@ -32,42 +32,27 @@ export default class Curve extends Tile {
   }
 
   next (car) {
-    const {x, y} = this.game.iso.unproject({
-      x: car.x,
-      y: car.y
-    })
-
-    const diff = {
-      x: Math.floor(Math.abs(this.regularizedPoint.x - x)),
-      y: Math.floor(Math.abs(this.regularizedPoint.y - y))
-    }
-
-    const allowed = {
-      'c125': [24, 35, 1],
-      'c126': [24, 35, 1],
-      'c122': [20, 40, -1],
-      'c124': [17, 28, 1]
-    }
-
-    let points = []
-
-    for (let i = 0; i <= 1; i += 0.006) {
-      let px = CONTROL_POINTS[this.name].map(pt => pt[0] + this.x)
-      let py = CONTROL_POINTS[this.name].map(pt => pt[1] + this.y)
-
-      px = this.game.math.bezierInterpolation(px, i);
-      py = this.game.math.bezierInterpolation(py, i);
-
-      points.push({
-        x: px,
-        y: py
-      })
-    }
-
     const next = this._nextHeading(car.heading)
 
     if (next < 0) {
       return null
+    }
+
+    let points = []
+
+    for (let i = 0; i <= 1; i += 0.005) {
+      let p = {
+        x: CONTROL_POINTS[this.name].map(pt => pt[0] + this.x),
+        y: CONTROL_POINTS[this.name].map(pt => pt[1] + this.y)
+      }
+
+      p.x = this.game.math.bezierInterpolation(p.x, i)
+      p.y = this.game.math.bezierInterpolation(p.y, i)
+
+      points.push({
+        x: p.x,
+        y: p.y
+      })
     }
 
     return {
