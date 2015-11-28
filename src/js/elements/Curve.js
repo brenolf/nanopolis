@@ -24,7 +24,7 @@ export default class Curve extends Tile {
       ],
       'c124': [
         [DIRECTION.DOWN, DIRECTION.RIGHT],
-        [DIRECTION.UP, DIRECTION.LEFT]
+        [DIRECTION.LEFT, DIRECTION.UP]
       ]
     }
 
@@ -32,11 +32,13 @@ export default class Curve extends Tile {
   }
 
   next (car) {
-    const next = this._nextHeading(car.heading)
+    const index = this._nextHeading(car.heading)
 
-    if (next < 0) {
+    if (index < 0) {
       return null
     }
+
+    const next = this.direction[index][1]
 
     let points = []
 
@@ -55,6 +57,10 @@ export default class Curve extends Tile {
       })
     }
 
+    if (index === 1) {
+      points.reverse()
+    }
+
     return {
       points,
       next
@@ -63,11 +69,11 @@ export default class Curve extends Tile {
 
   _nextHeading (heading) {
     if (this.direction[0][0] === heading) {
-      return this.direction[0][1]
+      return 0
     }
 
     if (this.direction[1][0] === heading) {
-      return this.direction[1][1]
+      return 1
     }
 
     return -1
