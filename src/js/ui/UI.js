@@ -38,6 +38,18 @@ export default class UI {
         }, 200, Phaser.Easing.Quadratic.InOut, true)
       })
     })
+
+    this.timer = this.game.add.text(this.game.world.width - 10, 10, this.context.runningTime.seconds, {
+        font: "65px Arial",
+        fill: "#ff0044",
+        align: "center"
+    });
+
+    this.timer.anchor.setTo(1, 0);
+  }
+
+  update () {
+    this.timer.setText(Math.floor(this.context.runningTime.seconds))
   }
 
   pause () {
