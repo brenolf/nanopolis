@@ -113,7 +113,7 @@ export default class Car extends GameSprite {
 
     const heading = this.path ? this.path.next : this.heading
 
-    switch(tile.constructor.name) {
+    switch (tile.constructor.name) {
       case 'Curve':
         return tile.getPath(heading) !== null
 

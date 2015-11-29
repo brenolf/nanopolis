@@ -39,13 +39,18 @@ export default class UI {
       })
     })
 
-    this.timer = this.game.add.text(this.game.world.width - 10, 10, this.context.runningTime.seconds, {
-        font: "65px Arial",
-        fill: "#ff0044",
-        align: "center"
-    });
+    this.timer = this.game.add.text(
+      this.game.world.width - 10,
+      10,
+      this.context.runningTime.seconds,
+      {
+        font: '65px Arial',
+        fill: '#ff0044',
+        align: 'center'
+      }
+    )
 
-    this.timer.anchor.setTo(1, 0);
+    this.timer.anchor.setTo(1, 0)
   }
 
   update () {

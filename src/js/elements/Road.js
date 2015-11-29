@@ -22,6 +22,7 @@ export default class Road extends Tile {
         if (this.direction === VERTICAL) {
           return heading
         }
+
       break
 
       default:

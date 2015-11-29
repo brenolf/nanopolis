@@ -28,10 +28,10 @@ export default class Curve extends Tile {
       ]
     }
 
-    CURVES['l126'] = CURVES['c125']
-    CURVES['l127'] = CURVES['c126']
-    CURVES['l123'] = CURVES['c122']
-    CURVES['l125'] = CURVES['c124']
+    CURVES.l126 = CURVES.c125
+    CURVES.l127 = CURVES.c126
+    CURVES.l123 = CURVES.c122
+    CURVES.l125 = CURVES.c124
 
     super(game, x, y, z, name, CURVES[name], group)
 
