@@ -26,6 +26,46 @@ export default class Map {
     this.game = game
   }
 
+  addTile (name, x, y) {
+    let tile;
+
+    const data = this._decode(name)
+
+    const z = (data.needsBiggerZ) ? 34 : 0
+
+    switch (data.type) {
+      case 'source':
+        tile = new Source(this.game, x, y, z, name, data.heading, this.tiles)
+
+        this.source = tile
+      break
+
+      case 'target':
+        tile = new Target(this.game, x, y, z, name, data.heading, this.tiles)
+
+        this.target = tile
+      break
+
+      case 'curve':
+        tile = new Curve(this.game, x, y, z, name, this.tiles)
+
+        // DEBUG:
+        this.game.bmd.rect(tile.x, tile.y, 3, 3, 'red')
+        this.game.bmd.rect(tile.x - 60, tile.y + 30, 3, 3, 'yellow')
+        this.game.bmd.rect(tile.x, tile.y + 60, 3, 3, 'magenta')
+        this.game.bmd.rect(tile.x + 60, tile.y + 30, 3, 3, 'black')
+        this.game.bmd.rect(tile.x, tile.y + 30, 3, 3, 'blue')
+        this.game.bmd.rect(tile.x + 30, tile.y + 45, 3, 3, 'cyan')
+        this.game.bmd.rect(tile.x - 30, tile.y + 15, 3, 3, 'lightgreen')
+        this.game.bmd.rect(tile.x + 30, tile.y + 15, 3, 3, 'orange')
+        this.game.bmd.rect(tile.x - 30, tile.y + 45, 3, 3, 'white')
+      break
+
+      default:
+        tile = new Tile(this.game, x, y, z, name, null, this.tiles)
+    }
+  }
+
   build () {
     let tile
 
@@ -37,43 +77,11 @@ export default class Map {
       const j = Math.floor(k / this.bounds.h)
 
       const name = this.map[j][i]
-      const data = this._decode(name)
 
       const x = i * SIZE
       const y = j * SIZE
-      const z = (data.needsBiggerZ) ? 34 : 0
 
-      switch (data.type) {
-        case 'source':
-          tile = new Source(this.game, x, y, z, name, data.heading, this.tiles)
-
-          this.source = tile
-        break
-
-        case 'target':
-          tile = new Target(this.game, x, y, z, name, data.heading, this.tiles)
-
-          this.target = tile
-        break
-
-        case 'curve':
-          tile = new Curve(this.game, x, y, z, name, this.tiles)
-
-          // DEBUG:
-          this.game.bmd.rect(tile.x, tile.y, 3, 3, 'red')
-          this.game.bmd.rect(tile.x - 60, tile.y + 30, 3, 3, 'yellow')
-          this.game.bmd.rect(tile.x, tile.y + 60, 3, 3, 'magenta')
-          this.game.bmd.rect(tile.x + 60, tile.y + 30, 3, 3, 'black')
-          this.game.bmd.rect(tile.x, tile.y + 30, 3, 3, 'blue')
-          this.game.bmd.rect(tile.x + 30, tile.y + 45, 3, 3, 'cyan')
-          this.game.bmd.rect(tile.x - 30, tile.y + 15, 3, 3, 'lightgreen')
-          this.game.bmd.rect(tile.x + 30, tile.y + 15, 3, 3, 'orange')
-          this.game.bmd.rect(tile.x - 30, tile.y + 45, 3, 3, 'white')
-        break
-
-        default:
-          tile = new Tile(this.game, x, y, z, name, null, this.tiles)
-      }
+      this.addTile(name, x, y)
     }
   }
 

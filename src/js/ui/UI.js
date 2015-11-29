@@ -2,12 +2,16 @@ export default class UI {
   constructor (context) {
     this.context = context
     this.game = context.game
+
+    this.wasDown = false;
   }
 
   buildInterface () {
     let tiles = [75, 111, 112, 117, 67, 82, 125, 126, 67]
 
     this.tileOptions = this.game.add.group()
+
+    this.selectedTile = null;
 
     tiles.forEach((tile, i) => {
       let name = `l${tile < 100 ? '0' + tile : tile}`
@@ -23,7 +27,14 @@ export default class UI {
       t.input.useHandCursor = true
 
       t.events.onInputDown.add(() => {
+        if (this.selectedTile !== null) {
+          this.selectedTile.tint = 0xffffff;
+          this.game.add.tween(this.selectedTile).to({
+            y: 400
+          }, 200, Phaser.Easing.Quadratic.InOut, true)
+        }
         t.tint = 0x7800ff
+        this.selectedTile = t;
       })
 
       t.events.onInputOver.add(() => {
@@ -33,9 +44,11 @@ export default class UI {
       })
 
       t.events.onInputOut.add(() => {
-        this.game.add.tween(t).to({
-          y: 400
-        }, 200, Phaser.Easing.Quadratic.InOut, true)
+        if (this.selectedTile !== t) {
+          this.game.add.tween(t).to({
+            y: 400
+          }, 200, Phaser.Easing.Quadratic.InOut, true)
+        }
       })
     })
 
@@ -50,6 +63,36 @@ export default class UI {
 
   update () {
     this.timer.setText(Math.floor(this.context.runningTime.seconds))
+
+    this.game.iso.unproject(this.game.input.activePointer.position, this.context.cursorPos);
+
+    this.clicked = this.wasDown === false && this.game.input.activePointer.isDown === true;
+
+
+    //console.log(this.wasDown + " " + this.game.input.activePointer.isDown + " " + this.clicked)
+    this.wasDown = this.game.input.activePointer.isDown;
+
+
+
+    // Loop through all tiles and test to see if the 3D position from above intersects with the automatically generated IsoSprite tile bounds.
+    this.game.map.tiles.forEach((tile) => {
+      var inBounds = tile.isoBounds.containsXY(this.context.cursorPos.x, this.context.cursorPos.y);
+      // If it does, do a little animation and tint change.
+      if (!tile.selected && inBounds) {
+        tile.selected = true;
+        tile.tint = 0x86bfda;
+      } else if (tile.selected && !inBounds) {
+        tile.selected = false;
+        tile.tint = 0xffffff;
+      }
+      if (this.selectedTile !== null && this.clicked && inBounds) {
+        let nx = tile.ORIGINAL.x;
+        let ny = tile.ORIGINAL.y;
+        this.game.map.addTile(this.selectedTile.frameName, nx, ny);
+        this.game.iso.simpleSort(this.game.map.tiles);
+        tile.destroy();
+      }
+    });
   }
 
   pause () {
