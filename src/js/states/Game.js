@@ -5,7 +5,8 @@ export default class Game extends World {
   create () {
     super.create()
 
-    this.START = this.game.time.now
+    this.runningTime = this.time.create(false)
+    this.runningTime.start()
 
     this.ui = new UI(this)
 
@@ -18,6 +19,7 @@ export default class Game extends World {
 
   update () {
     super.update()
+    this.ui.update()
   }
 
   lost () {
