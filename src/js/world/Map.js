@@ -2,15 +2,11 @@ import Tile from '../objects/Tile'
 import Source from '../elements/Source'
 import Target from '../elements/Target'
 import Curve from '../elements/Curve'
+import Road from '../elements/Road'
 
 const MAPS = require('../../json/maps.json')
 const SIZE = require('../../json/game.json').tileSize
-
-//              [ N,  E,  S,  W]
-const SOURCES = [41, 33, 26, 34]
-const TARGETS = [25, 18, 13, 19]
-
-const CURVES = [122, 124, 125, 126]
+const TILES = require('../../json/tiles.json')
 
 export default class Map {
   constructor (index, game) {
@@ -60,19 +56,46 @@ export default class Map {
           tile = new Curve(this.game, x, y, z, name, this.tiles)
 
           // DEBUG:
-          this.game.bmd.rect(tile.x, tile.y, 3, 3, 'red')
-          this.game.bmd.rect(tile.x - 60, tile.y + 30, 3, 3, 'yellow')
-          this.game.bmd.rect(tile.x, tile.y + 60, 3, 3, 'magenta')
-          this.game.bmd.rect(tile.x + 60, tile.y + 30, 3, 3, 'black')
-          this.game.bmd.rect(tile.x, tile.y + 30, 3, 3, 'blue')
-          this.game.bmd.rect(tile.x + 30, tile.y + 45, 3, 3, 'cyan')
-          this.game.bmd.rect(tile.x - 30, tile.y + 15, 3, 3, 'lightgreen')
-          this.game.bmd.rect(tile.x + 30, tile.y + 15, 3, 3, 'orange')
-          this.game.bmd.rect(tile.x - 30, tile.y + 45, 3, 3, 'white')
+          // this.game.bmd.rect(tile.x, tile.y, 3, 3, 'red')
+          // this.game.bmd.rect(tile.x - 60, tile.y + 30, 3, 3, 'yellow')
+          // this.game.bmd.rect(tile.x, tile.y + 60, 3, 3, 'magenta')
+          // this.game.bmd.rect(tile.x + 60, tile.y + 30, 3, 3, 'black')
+          // this.game.bmd.rect(tile.x, tile.y + 30, 3, 3, 'blue')
+          // this.game.bmd.rect(tile.x + 30, tile.y + 45, 3, 3, 'cyan')
+          // this.game.bmd.rect(tile.x - 30, tile.y + 15, 3, 3, 'lightgreen')
+          // this.game.bmd.rect(tile.x + 30, tile.y + 15, 3, 3, 'orange')
+          // this.game.bmd.rect(tile.x - 30, tile.y + 45, 3, 3, 'white')
+        break
+
+        case 'road':
+          tile = new Road(this.game, x, y, z, name, this.tiles)
         break
 
         default:
           tile = new Tile(this.game, x, y, z, name, null, this.tiles)
+      }
+
+      tile.ID = k
+
+      tile.connected[DIRECTION.UP] = null
+      tile.connected[DIRECTION.DOWN] = null
+      tile.connected[DIRECTION.LEFT] = null
+      tile.connected[DIRECTION.RIGHT] = null
+
+      if (j - 1 >= 0) {
+        const index = (j - 1) * this.bounds.w + i
+        const parent = this.tiles.children[index]
+
+        tile.connected[DIRECTION.UP] = parent
+        parent.connected[DIRECTION.DOWN] = tile
+      }
+
+      if (i - 1 >= 0) {
+        const index = j * this.bounds.w + i - 1
+        const parent = this.tiles.children[index]
+
+        tile.connected[DIRECTION.LEFT] = parent
+        parent.connected[DIRECTION.RIGHT] = tile
       }
     }
   }
@@ -83,31 +106,27 @@ export default class Map {
   }
 
   _decode (name) {
-    const sheet = name[0]
-
-    const index = parseInt(name.substr(1))
-
     let type = null
 
-    if (sheet === 'c') {
-      if (SOURCES.indexOf(index) >= 0) {
-        type = 'source'
-      } else if (TARGETS.indexOf(index) >= 0) {
-        type = 'target'
-      } else if (CURVES.indexOf(index) >= 0) {
-        type = 'curve'
+    let heading = null
+
+    for (let t in TILES) {
+      heading = TILES[t].indexOf(name)
+
+      if (heading >= 0) {
+        type = t
+        break
       }
     }
 
     let needsBiggerZ = type === 'source' || type === 'target'
 
-    needsBiggerZ = needsBiggerZ && index !== 19 && index !== 25
+    needsBiggerZ = needsBiggerZ && name !== 'c019' && name !== 'c025'
 
     return {
       name,
       type,
-      index,
-      heading: (type === 'source' ? SOURCES : TARGETS).indexOf(index),
+      heading,
       needsBiggerZ
     }
   }

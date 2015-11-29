@@ -14,10 +14,12 @@ const ANIMATIONS = {
 }
 
 export default class Car extends GameSprite {
-  constructor (game, x, y, z, heading, group) {
+  constructor (game, x, y, z, heading, source, group) {
     super(game, x, y, 0, 'cars', `carBlack1_00${FRAME_HEADING[heading]}`, group)
 
     this.game = game
+
+    this.current = source
 
     this.game.physics.isoArcade.enable(this)
 
@@ -70,27 +72,58 @@ export default class Car extends GameSprite {
   }
 
   update () {
-    if (this.path !== null) {
-      this.move()
+    let tile = this.current
+
+    const index = this.path ? this.path.next : this.heading
+
+    const nextTile = tile.connected[index]
+
+    if (!this.valid(nextTile)) {
+      return this.stop()
     }
 
-    this.game.map.tiles.forEach(tile => {
-      if (!tile.hover(this) || this.lastCommand === tile) {
-        return
-      }
+    if (nextTile.hover(this)) {
+      this.current = tile = nextTile
+    }
 
-      tile.tint = 0x994444
+    tile.tint = 0x994444
 
-      switch (tile.constructor.name) {
-        case 'Curve':
-          this.path = tile.next(this)
-          this.lastCommand = tile
-        break
+    this.move()
 
-        case 'Target':
-          this.destroy()
-        break
-      }
-    })
+    if (this.lastCommand === tile) {
+      return
+    }
+
+    switch (tile.constructor.name) {
+      case 'Curve':
+        this.path = tile.getPath(this.heading)
+        this.lastCommand = tile
+      break
+
+      case 'Target':
+        this.destroy()
+      break
+    }
+  }
+
+  valid (tile) {
+    if (tile === null) {
+      return false
+    }
+
+    const heading = this.path ? this.path.next : this.heading
+
+    switch(tile.constructor.name) {
+      case 'Curve':
+        return tile.getPath(heading) !== null
+
+      case 'Road':
+        return tile.nextHeading(heading) !== -1
+
+      case 'Target':
+        return true
+    }
+
+    return false
   }
 }

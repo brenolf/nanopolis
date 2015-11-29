@@ -22,6 +22,8 @@ export default class Tile extends GameSprite {
       x: this.x,
       y: this.y
     })
+
+    this.connected = []
   }
 
   hover (element) {
