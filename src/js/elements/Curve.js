@@ -28,19 +28,14 @@ export default class Curve extends Tile {
       ]
     }
 
+    CURVES['l126'] = CURVES['c125']
+    CURVES['l127'] = CURVES['c126']
+    CURVES['l123'] = CURVES['c122']
+    CURVES['l125'] = CURVES['c124']
+
     super(game, x, y, z, name, CURVES[name], group)
-  }
 
-  next (car) {
-    const index = this._nextHeading(car.heading)
-
-    if (index < 0) {
-      return null
-    }
-
-    const next = this.direction[index][1]
-
-    let points = []
+    this.bezier = []
 
     for (let i = 0; i <= 1; i += 0.005) {
       let p = {
@@ -51,18 +46,24 @@ export default class Curve extends Tile {
       p.x = this.game.math.bezierInterpolation(p.x, i)
       p.y = this.game.math.bezierInterpolation(p.y, i)
 
-      points.push({
+      this.bezier.push({
         x: p.x,
         y: p.y
       })
     }
+  }
 
-    if (index === 1) {
-      points.reverse()
+  getPath (heading) {
+    const index = this._nextHeading(heading)
+
+    if (index < 0) {
+      return null
     }
 
+    const next = this.direction[index][1]
+
     return {
-      points,
+      points: (index === 1) ? this.bezier.reverse() : this.bezier,
       next
     }
   }

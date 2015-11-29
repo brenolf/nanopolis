@@ -18,12 +18,11 @@ export default class Source extends Tile {
       x + HALF_SIZE,
       y + HALF_SIZE,
       0,
-      this.direction
+      this.direction,
+      this
     )
 
     this.cars.push(car)
-
-    car.move()
   }
 
   update () {
