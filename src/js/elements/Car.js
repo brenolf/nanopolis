@@ -72,6 +72,9 @@ export default class Car extends GameSprite {
   }
 
   update () {
+    if (this.game === null) {
+      return
+    }
     let tile = this.current
 
     const index = this.path ? this.path.next : this.heading
@@ -107,7 +110,8 @@ export default class Car extends GameSprite {
   }
 
   valid (tile) {
-    if (tile === null) {
+    if (tile === null || tile.game === null) {
+      tile.tint = 0x86bfda
       return false
     }
 

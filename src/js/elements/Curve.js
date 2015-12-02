@@ -63,7 +63,7 @@ export default class Curve extends Tile {
     const next = this.direction[index][1]
 
     return {
-      points: (index === 1) ? this.bezier.reverse() : this.bezier,
+      points: (index === 1) ? this.bezier.slice().reverse() : this.bezier.slice(),
       next
     }
   }
