@@ -141,6 +141,15 @@ export default class Map {
     this.target.update()
   }
 
+  checkIfBlankTile (name) {
+    const data = this._decode(name)
+    if (data.type === 'tile') {
+      return true
+    } else {
+      return false
+    }
+  }
+
   _decode (name) {
     let type = null
 
@@ -153,6 +162,10 @@ export default class Map {
         type = t
         break
       }
+    }
+
+    if (type === null) {
+      type = 'tile';
     }
 
     let needsBiggerZ = type === 'source' || type === 'target'

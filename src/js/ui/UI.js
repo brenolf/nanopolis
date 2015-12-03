@@ -81,14 +81,15 @@ export default class UI {
     this.game.map.tiles.forEach((tile) => {
       var inBounds = tile.isoBounds.containsXY(this.context.cursorPos.x, this.context.cursorPos.y)
       // If it does, tint change.
-      if (!tile.selected && inBounds) {
+      if (!tile.selected && inBounds && this.game.map.checkIfBlankTile(tile.name)) {
         tile.selected = true
         tile.tint = 0x86bfda
       } else if (tile.selected && !inBounds) {
         tile.selected = false
         tile.tint = 0xffffff
       }
-      if (this.selectedTile !== null && this.clicked && inBounds) {
+      if (this.selectedTile !== null && this.clicked
+          && inBounds && this.game.map.checkIfBlankTile(tile.name)) {
         this.game.map.addTile(tile.ID, this.selectedTile.frameName, true)
         this.game.iso.simpleSort(this.game.map.tiles)
         tile.destroy()
