@@ -8,7 +8,7 @@ export default class UI {
 
   buildInterface () {
     let tiles = [
-      'c081', 'c073', 'l082', 'l074', 'c125', 'c126', 'c122', 'c124'
+      'c081', 'c073', 'l082', 'l074', 'c125', 'c126', 'c122', 'c124', 'l075'
     ]
 
     this.tileOptions = this.game.add.group()
@@ -22,6 +22,8 @@ export default class UI {
       const y = 400
 
       let t = this.game.add.sprite(x, y, 'roads', name, this.tileOptions)
+
+      t.name = name
 
       t.scale.setTo(0.5)
 
@@ -68,6 +70,20 @@ export default class UI {
     this.timer.anchor.setTo(1, 0)
   }
 
+  checkIfPlaceable (mapTile, uiTile) {
+    if (this.game.map.checkIfBlankTile(mapTile)) {
+      return true
+    }
+
+    if (this.game.map.checkIfBlankTile(uiTile)) {
+      if (!this.game.map.checkIfSourceOrTarget(mapTile)) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   update () {
     this.timer.setText(Math.floor(this.context.runningTime.seconds))
 
@@ -81,7 +97,8 @@ export default class UI {
     this.game.map.tiles.forEach((tile) => {
       var inBounds = tile.isoBounds.containsXY(this.context.cursorPos.x, this.context.cursorPos.y)
       // If it does, tint change.
-      if (!tile.selected && inBounds && this.game.map.checkIfBlankTile(tile.name)) {
+      if (!tile.selected && this.selectedTile !== null &&
+          inBounds && this.checkIfPlaceable(tile, this.selectedTile)) {
         tile.selected = true
         tile.tint = 0x86bfda
       } else if (tile.selected && !inBounds) {
@@ -89,7 +106,7 @@ export default class UI {
         tile.tint = 0xffffff
       }
       if (this.selectedTile !== null && this.clicked
-          && inBounds && this.game.map.checkIfBlankTile(tile.name)) {
+          && inBounds && this.checkIfPlaceable(tile, this.selectedTile)) {
         this.game.map.addTile(tile.ID, this.selectedTile.frameName, true)
         this.game.iso.simpleSort(this.game.map.tiles)
         tile.destroy()

@@ -141,9 +141,20 @@ export default class Map {
     this.target.update()
   }
 
-  checkIfBlankTile (name) {
+  checkIfBlankTile (tile) {
+    let name = tile.name
     const data = this._decode(name)
     if (data.type === 'tile') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  checkIfSourceOrTarget (tile) {
+    let name = tile.name
+    const data = this._decode(name)
+    if (data.type === 'source' || data.type === 'target') {
       return true
     } else {
       return false
