@@ -14,7 +14,7 @@ export default class Game extends World {
 
     this.paused = false
 
-    this.game.map.source.spawn()
+    this.game.map.initialize()
   }
 
   update () {

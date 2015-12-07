@@ -1,4 +1,5 @@
 import Map from './Map'
+import MapEditor from './MapEditor'
 
 const GAME = require('../../json/game.json')
 
@@ -20,7 +21,11 @@ export default class World {
     this.game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE)
     this.game.iso.anchor.setTo(0.5, 0)
 
-    this.game.map = new Map(GAME.firstMap, this.game)
+    if (GAME.mapEditorMode) {
+      this.game.map = new MapEditor(this)
+    } else {
+      this.game.map = new Map(GAME.firstMap, this)
+    }
   }
 
   create () {
