@@ -34,6 +34,8 @@ export default class UI {
 
     t.name = name
 
+    t.y = y
+
     t.scale.setTo(0.5)
 
     t.inputEnabled = true
@@ -43,7 +45,7 @@ export default class UI {
       if (this.selectedTile !== null) {
         this.selectedTile.tint = 0xffffff;
         this.game.add.tween(this.selectedTile).to({
-          y: y
+          y: this.selectedTile.y
         }, 200, Phaser.Easing.Quadratic.InOut, true)
       }
       t.tint = 0x7800ff
