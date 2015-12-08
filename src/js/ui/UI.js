@@ -4,57 +4,73 @@ export default class UI {
     this.game = context.game
 
     this.wasDown = false;
+
+    this.currentTile = 0;
+  }
+
+  addObjectsToMap (tiles) {
+    tiles.forEach((tile, i) => {
+      this.addObjectToMap(tile)
+    })
+  }
+
+  addObjectToMap (tile) {
+    let name = tile;
+
+    let i = this.currentTile
+    this.currentTile++
+
+
+    let y = 360
+
+    if (i >= 11) {
+      y = 440
+      i = i - 11
+    }
+
+    const x = i * 80 + 10
+
+    let t = this.game.add.sprite(x, y, 'roads', name, this.tileOptions)
+
+    t.name = name
+
+    t.y = y
+
+    t.scale.setTo(0.5)
+
+    t.inputEnabled = true
+    t.input.useHandCursor = true
+
+    t.events.onInputDown.add(() => {
+      if (this.selectedTile !== null) {
+        this.selectedTile.tint = 0xffffff;
+        this.game.add.tween(this.selectedTile).to({
+          y: this.selectedTile.y
+        }, 200, Phaser.Easing.Quadratic.InOut, true)
+      }
+      t.tint = 0x7800ff
+      this.selectedTile = t;
+    })
+
+    t.events.onInputOver.add(() => {
+      this.game.add.tween(t).to({
+        y: y - 5
+      }, 200, Phaser.Easing.Quadratic.InOut, true)
+    })
+
+    t.events.onInputOut.add(() => {
+      if (this.selectedTile !== t) {
+        this.game.add.tween(t).to({
+          y: y
+        }, 200, Phaser.Easing.Quadratic.InOut, true)
+      }
+    })
   }
 
   buildInterface () {
-    let tiles = [
-      'c081', 'c073', 'l082', 'l074', 'c125', 'c126', 'c122', 'c124', 'l075'
-    ]
-
     this.tileOptions = this.game.add.group()
 
     this.selectedTile = null
-
-    tiles.forEach((tile, i) => {
-      let name = tile;
-
-      const x = i * 80 + 10
-      const y = 400
-
-      let t = this.game.add.sprite(x, y, 'roads', name, this.tileOptions)
-
-      t.name = name
-
-      t.scale.setTo(0.5)
-
-      t.inputEnabled = true
-      t.input.useHandCursor = true
-
-      t.events.onInputDown.add(() => {
-        if (this.selectedTile !== null) {
-          this.selectedTile.tint = 0xffffff;
-          this.game.add.tween(this.selectedTile).to({
-            y: 400
-          }, 200, Phaser.Easing.Quadratic.InOut, true)
-        }
-        t.tint = 0x7800ff
-        this.selectedTile = t;
-      })
-
-      t.events.onInputOver.add(() => {
-        this.game.add.tween(t).to({
-          y: 395
-        }, 200, Phaser.Easing.Quadratic.InOut, true)
-      })
-
-      t.events.onInputOut.add(() => {
-        if (this.selectedTile !== t) {
-          this.game.add.tween(t).to({
-            y: 400
-          }, 200, Phaser.Easing.Quadratic.InOut, true)
-        }
-      })
-    })
 
     this.timer = this.game.add.text(
       this.game.world.width - 10,

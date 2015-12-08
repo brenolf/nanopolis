@@ -3,5 +3,6 @@
   "width": 900,
   "height": 500,
   "tileSize": 70,
-  "firstMap": 3
+  "firstMap": 4,
+  "mapEditorMode": true   
 }

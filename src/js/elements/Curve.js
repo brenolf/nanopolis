@@ -4,7 +4,11 @@ const CONTROL_POINTS = {
   'c125': [[-30, 15], [0, 30], [-30, 45]],
   'c126': [[30, 15], [0, 30], [-30, 15]],
   'c122': [[30, 45], [0, 30], [-30, 45]],
-  'c124': [[30, 15], [0, 30], [30, 45]]
+  'c124': [[30, 15], [0, 30], [30, 45]],
+  'l123': [[30, 45], [0, 30], [-30, 45]],
+  'l125': [[30, 15], [0, 30], [30, 45]],
+  'l126': [[-30, 15], [0, 30], [-30, 45]],
+  'l127': [[30, 15], [0, 30], [-30, 15]]
 }
 
 export default class Curve extends Tile {
@@ -23,6 +27,22 @@ export default class Curve extends Tile {
         [DIRECTION.UP, DIRECTION.RIGHT]
       ],
       'c124': [
+        [DIRECTION.DOWN, DIRECTION.RIGHT],
+        [DIRECTION.LEFT, DIRECTION.UP]
+      ],
+      'l126': [
+        [DIRECTION.RIGHT, DIRECTION.DOWN],
+        [DIRECTION.UP, DIRECTION.LEFT]
+      ],
+      'l127': [
+        [DIRECTION.DOWN, DIRECTION.LEFT],
+        [DIRECTION.RIGHT, DIRECTION.UP]
+      ],
+      'l123': [
+        [DIRECTION.LEFT, DIRECTION.DOWN],
+        [DIRECTION.UP, DIRECTION.RIGHT]
+      ],
+      'l125': [
         [DIRECTION.DOWN, DIRECTION.RIGHT],
         [DIRECTION.LEFT, DIRECTION.UP]
       ]
