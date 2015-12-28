@@ -1,3 +1,5 @@
+const GAME = require('../../json/game.json')
+
 export default class UI {
   constructor (context) {
     this.context = context
@@ -8,13 +10,13 @@ export default class UI {
     this.currentTile = 0;
   }
 
-  addObjectsToMap (tiles) {
+  addPlaceableTilesToUI (tiles) {
     tiles.forEach((tile, i) => {
-      this.addObjectToMap(tile)
+      this.addPlaceableTileToUI(tile)
     })
   }
 
-  addObjectToMap (tile) {
+  addPlaceableTileToUI (tile) {
     let name = tile;
 
     let i = this.currentTile
@@ -49,7 +51,7 @@ export default class UI {
         }, 200, Phaser.Easing.Quadratic.InOut, true)
       }
       t.tint = 0x7800ff
-      this.selectedTile = t;
+      this.selectedTile = t
     })
 
     t.events.onInputOver.add(() => {
@@ -65,6 +67,10 @@ export default class UI {
         }, 200, Phaser.Easing.Quadratic.InOut, true)
       }
     })
+  }
+
+  removePlaceableTileFromUI (tile) {
+    tile.destroy()
   }
 
   buildInterface () {
@@ -126,6 +132,11 @@ export default class UI {
         this.game.map.addTile(tile.ID, this.selectedTile.frameName, true)
         this.game.iso.simpleSort(this.game.map.tiles)
         tile.destroy()
+
+        if (!GAME.mapEditorMode) {
+          this.removePlaceableTileFromUI(this.selectedTile)
+          this.selectedTile = null
+        }
       }
     })
   }
