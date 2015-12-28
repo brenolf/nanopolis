@@ -29,7 +29,7 @@ export default class Map extends AbstractMap {
       "c081", "c073", "l082", "l074"
     ]
 
-    this.context.ui.addObjectsToMap(tiles)
+    this.context.ui.addPlaceableTilesToUI(tiles)
   }
 
   createMapArray () {

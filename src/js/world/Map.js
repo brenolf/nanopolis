@@ -26,6 +26,6 @@ export default class Map extends AbstractMap {
     let tiles = [
       'c081', 'c073', 'l082', 'l074', 'c125', 'c126', 'c122', 'c124', 'l075'
     ]
-    this.context.ui.addObjectsToMap(tiles)
+    this.context.ui.addPlaceableTilesToUI(tiles)
   }
 }
