@@ -24,7 +24,11 @@ export default class Map extends AbstractMap {
     this.source.spawn()
 
     let tiles = [
-      'c081', 'c073', 'l082', 'l074', 'c125', 'c126', 'c122', 'c124', 'l075'
+      {name: "c081", quantity: 5}, {name: "c073", quantity: 1},
+      {name: "l082", quantity: 4}, {name: "l074", quantity: 1},
+      {name: "c125", quantity: 3}, {name: "c126", quantity: 1},
+      {name: "c122", quantity: 2}, {name: "c124", quantity: 1},
+      {name: "l075", quantity: 1}
     ]
     this.context.ui.addPlaceableTilesToUI(tiles)
   }

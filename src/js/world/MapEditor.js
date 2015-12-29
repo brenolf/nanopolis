@@ -24,9 +24,16 @@ export default class Map extends AbstractMap {
     this.game.add.button(10, 10, 'l075', this.saveMap, this)
 
     let tiles = [
-      "c041", "c033", "c026", "c034", "c025", "c018", "c013", "c019",
-      "c122", "c124", "c125", "c126", "l126", "l127", "l123", "l125",
-      "c081", "c073", "l082", "l074"
+      {name: "c041", quantity: 1}, {name: "c033", quantity: 1},
+      {name: "c026", quantity: 1}, {name: "c034", quantity: 1},
+      {name: "c025", quantity: 1}, {name: "c018", quantity: 1},
+      {name: "c013", quantity: 1}, {name: "c019", quantity: 1},
+      {name: "c122", quantity: 1}, {name: "c124", quantity: 1},
+      {name: "c125", quantity: 1}, {name: "c126", quantity: 1},
+      {name: "l126", quantity: 1}, {name: "l127", quantity: 1},
+      {name: "l123", quantity: 1}, {name: "l125", quantity: 1},
+      {name: "c081", quantity: 1}, {name: "c073", quantity: 1},
+      {name: "l082", quantity: 1}, {name: "l074", quantity: 1}
     ]
 
     this.context.ui.addPlaceableTilesToUI(tiles)

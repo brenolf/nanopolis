@@ -17,7 +17,7 @@ export default class UI {
   }
 
   addPlaceableTileToUI (tile) {
-    let name = tile;
+    let name = tile.name;
 
     let i = this.currentTile
     this.currentTile++
@@ -35,6 +35,20 @@ export default class UI {
     let t = this.game.add.sprite(x, y, 'roads', name, this.tileOptions)
 
     t.name = name
+
+    //changing the property dynamically. Is it a good idea?
+    t.quantity = tile.quantity
+
+    t.quantityText = this.game.add.text(
+      t.x,
+      t.y,
+      t.quantity,
+      {
+        font: '8px Arial',
+        fill: '#ff0044',
+        align: 'center'
+      }
+    )
 
     t.y = y
 
@@ -70,6 +84,7 @@ export default class UI {
   }
 
   removePlaceableTileFromUI (tile) {
+    tile.quantityText.destroy()
     tile.destroy()
   }
 
@@ -134,8 +149,14 @@ export default class UI {
         tile.destroy()
 
         if (!GAME.mapEditorMode) {
-          this.removePlaceableTileFromUI(this.selectedTile)
-          this.selectedTile = null
+          this.selectedTile.quantity--;
+
+          if (this.selectedTile.quantity <= 0) {
+            this.removePlaceableTileFromUI(this.selectedTile)
+            this.selectedTile = null
+          } else {
+            this.selectedTile.quantityText.setText(this.selectedTile.quantity)
+          }
         }
       }
     })
