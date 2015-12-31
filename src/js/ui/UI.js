@@ -8,6 +8,37 @@ export default class UI {
     this.wasDown = false;
 
     this.currentTile = 0;
+
+    this.tiles = []
+  }
+
+  updateTileXY (tile, x, y) {
+    tile.x = x
+    tile.y = y
+    tile.quantityText.x = x
+    tile.quantityText.y = y
+  }
+
+  reorganizeTiles (index = 0) {
+    for (let i = index; i < this.tiles.length; i++) {
+      this.tiles[i].uiPositionIndex--;
+      let xy = this.calculateXYUIPosition (i)
+
+      this.updateTileXY (this.tiles[i], xy.x, xy.y)
+    }
+  }
+
+  calculateXYUIPosition (i) {
+    let y = 360
+
+    if (i >= 11) {
+      y = 440
+      i = i - 11
+    }
+
+    const x = i * 80 + 10
+
+    return {x: x, y: y}
   }
 
   addPlaceableTilesToUI (tiles) {
@@ -22,17 +53,15 @@ export default class UI {
     let i = this.currentTile
     this.currentTile++
 
-
-    let y = 360
-
-    if (i >= 11) {
-      y = 440
-      i = i - 11
-    }
-
-    const x = i * 80 + 10
+    let xy = this.calculateXYUIPosition (i)
+    let x = xy.x
+    let y = xy.y
 
     let t = this.game.add.sprite(x, y, 'roads', name, this.tileOptions)
+
+    t.uiPositionIndex = i
+
+    this.tiles.push(t)
 
     t.name = name
 
@@ -84,6 +113,12 @@ export default class UI {
   }
 
   removePlaceableTileFromUI (tile) {
+    this.tiles.splice(tile.uiPositionIndex, 1)
+
+    this.reorganizeTiles(tile.uiPositionIndex)
+
+    this.currentTile--
+
     tile.quantityText.destroy()
     tile.destroy()
   }
