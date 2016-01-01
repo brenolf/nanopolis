@@ -74,7 +74,7 @@ gulp.task('json', function() {
 
 gulp.task('audio', function () {
   return gulp
-  .src('./src/audio/*')
+  .src('./src/audio/**/*')
   .pipe(gulp.dest('./build/assets/audio'))
 })
 

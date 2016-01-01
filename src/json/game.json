@@ -3,6 +3,7 @@
   "width": 900,
   "height": 500,
   "tileSize": 70,
-  "firstMap": 4,
-  "mapEditorMode": false   
+  "firstStage": 3,
+  "music": "game_music",
+  "mapEditorMode": false
 }
