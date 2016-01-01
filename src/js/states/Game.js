@@ -15,6 +15,8 @@ export default class Game extends World {
     this.paused = false
 
     this.game.map.initialize()
+
+    this.game.sound.play(this.stage.musicName, 1, true)
   }
 
   update () {

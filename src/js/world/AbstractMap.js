@@ -4,13 +4,12 @@ import Target from '../elements/Target'
 import Curve from '../elements/Curve'
 import Road from '../elements/Road'
 
-const MAPS = require('../../json/maps.json')
 const SIZE = require('../../json/game.json').tileSize
 const TILES = require('../../json/tiles.json')
 
 export default class Map {
-  constructor (index, context) {
-    this.map = MAPS[index]
+  constructor (map, context) {
+    this.map = map
 
     this.bounds = {
       w: this.map[0].length,

@@ -2,6 +2,7 @@ import Map from './Map'
 import MapEditor from './MapEditor'
 
 const GAME = require('../../json/game.json')
+const STAGES = require('../../json/stages.json')
 
 global.DIRECTION = {
   UP: 0,
@@ -20,11 +21,13 @@ export default class World {
     this.game.world.setBounds(0, 0, GAME.width, GAME.height)
     this.game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE)
     this.game.iso.anchor.setTo(0.5, 0)
+    this.stageIndex = GAME.firstStage
+    this.stage = STAGES[this.stageIndex]
 
     if (GAME.mapEditorMode) {
       this.game.map = new MapEditor(this)
     } else {
-      this.game.map = new Map(GAME.firstMap, this)
+      this.game.map = new Map(this.stage.map, this)
     }
   }
 

@@ -1,3 +1,5 @@
+const AUDIOS = require('../../json/audios.json')
+
 export default class Preload {
   preload () {
     let styling = {
@@ -38,11 +40,11 @@ export default class Preload {
   }
 
   loadAudios () {
-    let audios = []
+    let audios = AUDIOS
 
-    audios.forEach(name => {
-      this.load.audio(name, [`assets/audio/${name}.aac`,
-      `assets/audio/${name}.ogg`])
+    audios.forEach(audio => {
+      this.load.audio(audio.resourceName,
+        [`assets/audio/${audio.resourceType}/${audio.fileName}`])
     })
   }
 }
