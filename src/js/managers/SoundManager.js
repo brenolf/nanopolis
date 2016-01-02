@@ -5,15 +5,21 @@ export default class SoundManager {
   }
 
   playNewMusic (key) {
-    if (this.currentMusic != null) {
-      this.currentMusic.pause()
+    if (this.currentMusic !== null) {
+      if (this.currentMusic.key === key) {
+        this.resumeMusic
+        return
+      } else {
+        this.currentMusic.pause()
+      }
     }
+
     this.currentMusic = this.game.sound.play(key, 1, true)
   }
 
-  playMusic () {
-    if (this.currentMusic != null) {
-      this.currentMusic.play()
+  resumeMusic () {
+    if (this.currentMusic != null && this.currentMusic.paused) {
+      this.currentMusic.resume()
     }
   }
 

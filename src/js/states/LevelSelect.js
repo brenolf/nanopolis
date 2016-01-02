@@ -12,6 +12,8 @@ export default class LevelSelect {
 
     this.game.stage.backgroundColor = '#101155'
     this.createButtons()
+
+    this.game.soundManager.playNewMusic('Hyperfun')
   }
 
   createButtons () {
