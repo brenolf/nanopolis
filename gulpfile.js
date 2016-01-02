@@ -68,7 +68,7 @@ gulp.task('html', function() {
 
 gulp.task('json', function() {
   return gulp
-  .src('./src/json/*')
+  .src('./src/json/**/*')
   .pipe(gulp.dest('./build/assets/json'))
 })
 
@@ -80,7 +80,7 @@ gulp.task('audio', function () {
 
 gulp.task('img', function() {
   return gulp
-  .src('./src/img/*')
+  .src('./src/img/**/*')
   // .pipe(img())
   .pipe(gulp.dest('./build/assets/img/'))
 })

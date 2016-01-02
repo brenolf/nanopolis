@@ -7,7 +7,7 @@
       ["l075", "l075", "l075", "l075", "l075"],
       ["l075", "l075", "l075", "l075", "l075"]
     ],
-    "stageName": "1",
+    "stageName": "0",
     "musicName": "Lively_Lumpsucker"
   },
   {
@@ -18,7 +18,7 @@
       ["l075", "l075", "l075", "l075", "l075"],
       ["l075", "l075", "l075", "l075", "l075"]
     ],
-    "stageName": "2",
+    "stageName": "1",
     "musicName": "Lively_Lumpsucker"
   },
   {
@@ -29,7 +29,7 @@
       ["l075", "l075", "l075", "l075", "l075"],
       ["c124", "l075", "l075", "l075", "c019"]
     ],
-    "stageName": "3",
+    "stageName": "2",
     "musicName": "Lively_Lumpsucker"
   },
   {
@@ -40,7 +40,7 @@
       ["l075", "l075", "l075", "l075", "l075"],
       ["l075", "l075", "l075", "l075", "l075"]
     ],
-    "stageName": "4",
+    "stageName": "3",
     "musicName": "Lively_Lumpsucker"
   },
   {
@@ -51,7 +51,7 @@
       ["l075", "l075", "l075", "l075", "l075"],
       ["l075", "l075", "l075", "l075", "l075"]
     ],
-    "stageName": "5",
+    "stageName": "4",
     "musicName": "Lively_Lumpsucker"
   }
 ]

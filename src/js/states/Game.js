@@ -12,14 +12,18 @@ export default class Game extends World {
 
     this.ui.buildInterface()
 
-    this.paused = false
+    this.game.isPaused = false
 
     this.game.map.initialize()
 
-    this.game.sound.play(this.stage.musicName, 1, true)
+    this.game.soundManager.playNewMusic(this.stage.musicName)
   }
 
   update () {
+    if (this.game.isPaused) {
+      return
+    }
+
     super.update()
     this.ui.update()
   }
@@ -31,12 +35,14 @@ export default class Game extends World {
   }
 
   pause () {
-    this.paused = true
+    this.game.isPaused = true
+    this.runningTime.pause()
     super.pause()
   }
 
   resume () {
-    this.paused = false
+    this.game.isPaused = false
+    this.runningTime.resume()
     super.resume()
   }
 }
