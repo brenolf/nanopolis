@@ -21,7 +21,7 @@ export default class World {
     this.game.world.setBounds(0, 0, GAME.width, GAME.height)
     this.game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE)
     this.game.iso.anchor.setTo(0.5, 0)
-    this.stageIndex = GAME.firstStage
+    this.stageIndex = this.data.stage
     this.stage = STAGES[this.stageIndex]
 
     if (GAME.mapEditorMode) {

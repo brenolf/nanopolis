@@ -19,6 +19,7 @@ export default class Preload {
 
     this.loadSprites()
     this.loadAudios()
+    this.loadButtons()
   }
 
   init (data) {
@@ -26,8 +27,9 @@ export default class Preload {
   }
 
   create () {
-    this.state.start('game', true, false, this.data)
+    this.state.start('menu', true, false, this.data)
   }
+
 
   loadSprites () {
     const sprites = ['roads', 'cars']
@@ -35,8 +37,22 @@ export default class Preload {
     sprites.forEach(sprite => this.load.atlasJSONHash(
       `${sprite}`,
       `assets/img/${sprite}.png`,
-      `assets/json/${sprite}.json`
+      `assets/json/img/${sprite}.json`
     ))
+  }
+
+  loadButtons () {
+    //it's ugly, but we need to refactor this entire class later anyway
+    const buttons = [['menu_button', 'button_texture_atlas']]
+
+    buttons.forEach(button => this.load.atlasJSONHash(
+      `${button[0]}`,
+      `assets/img/buttons/${button[1]}.png`,
+      `assets/json/img/buttons/${button[1]}.json`
+    ))
+
+    this.load.image('stage_button', 'assets/img/buttons/stage_button.png');
+    this.load.image('pause_button', 'assets/img/buttons/pause_button.png');
   }
 
   loadAudios () {

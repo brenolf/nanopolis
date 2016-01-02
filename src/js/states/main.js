@@ -2,6 +2,8 @@ import Game from './Game'
 import Splash from './Splash'
 import Preload from './Preload'
 import Boot from './Boot'
+import Menu from './Menu'
+import LevelSelect from './LevelSelect'
 
 const GAME_DATA = require('../../json/game')
 
@@ -19,6 +21,8 @@ window.GAME = function (handler) {
   game.state.add('preload', Preload)
   game.state.add('splash', Splash)
   game.state.add('game', Game)
+  game.state.add('menu', Menu)
+  game.state.add('levelselect', LevelSelect)
 
   game.state.start('boot', true, false, handler)
 }

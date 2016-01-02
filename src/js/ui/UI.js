@@ -1,3 +1,4 @@
+import OverlayMenu from './OverlayMenu'
 const GAME = require('../../json/game.json')
 
 export default class UI {
@@ -10,6 +11,11 @@ export default class UI {
     this.currentTile = 0;
 
     this.tiles = []
+
+    this.pauseMenu = new OverlayMenu(context)
+
+    this.game.add.button(this.game.world.width - 50, 10, 'pause_button',
+      this.pause, this)
   }
 
   updateTileXY (tile, x, y) {
@@ -198,10 +204,22 @@ export default class UI {
   }
 
   pause () {
+    this.pauseMenu.showMenu(this, this.resume, this.levelSelect, this.mainMenu)
     this.context.pause()
   }
 
   resume () {
+    this.pauseMenu.hideMenu()
     this.context.resume()
+  }
+
+  levelSelect () {
+    this.resume ()
+    this.game.state.start('levelselect', true, false, {})
+  }
+
+  mainMenu () {
+    this.resume ()
+    this.game.state.start('menu', true, false, {})
   }
 }

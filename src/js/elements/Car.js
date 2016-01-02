@@ -72,6 +72,12 @@ export default class Car extends GameSprite {
   }
 
   update () {
+    if (this.game.isPaused) {
+      this.body.velocity.x = 0
+      this.body.velocity.y = 0
+      return
+    }
+
     if (this.game === null) {
       return
     }
